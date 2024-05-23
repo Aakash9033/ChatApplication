@@ -1,0 +1,21 @@
+import React from "react";
+import { IoSearchSharp } from "react-icons/io5";
+const Searchinput = () => {
+  return (
+    <form className=" flex items-center gap-2">
+      <input
+        type="text"
+        placeholder="Search"
+        className=" text-gray-300 bg-gray-800 input input-bordered  rounded-full"
+      />
+      <button
+        type="submit"
+        className="btn btn-circle bg-sky-500 text-white hover:bg-sky-500"
+      >
+        <IoSearchSharp className="w-6 h-6 outline-none" />
+      </button>
+    </form>
+  );
+};
+
+export default Searchinput;
