@@ -3,9 +3,7 @@ import Converstaion from "./Converstaion";
 
 const Conversations = () => {
   return (
-    <div className="py-2 flex flex-col overflow-auto ">
-      <Converstaion />
-      <Converstaion />
+    <div className="py-2 flex flex-col overflow-auto">
       <Converstaion />
       <Converstaion />
       <Converstaion />
