@@ -6,27 +6,33 @@ export const sendMessage = async (req, res) => {
     const { message } = req.body;
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
-    let converstation = await Conversation.findOne({
+
+    let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
     });
-    if (!converstation) {
-      converstation = await Conversation.create({
+
+    if (!conversation) {
+      conversation = await Conversation.create({
         participants: [senderId, receiverId],
       });
     }
+
     const newMessage = new Message({
       senderId,
       receiverId,
       message,
     });
+
     if (newMessage) {
-      converstation.messages.push(newMessage._id);
+      conversation.messages.push(newMessage._id);
     }
-    //this not run in parallel
-    // await converstation.save();
+
+    // await conversation.save();
     // await newMessage.save();
-    //this will run in parallel but same function as above
-    await Promise.all([converstation.save(), newMessage.save()]);
+
+    // this will run in parallel
+    await Promise.all([conversation.save(), newMessage.save()]);
+
     res.status(201).json(newMessage);
   } catch (error) {
     console.log("Error in sendMessage controller", error.message);
